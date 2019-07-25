@@ -12,20 +12,22 @@ class ExampleController < ApplicationController
   def upload
   end
 
+  @@visual_recognition = VisualRecognitionV3.new(
+    version: "2018-03-19",
+    iam_apikey: ENV["APIKEY"]
+  )
+
   #文字認証
   def ddd
   end
 
   #食べ物認証
   def aaa
-    visual_recognition = VisualRecognitionV3.new(
-      version: "2018-03-19",
-      iam_apikey: "UijvdSiykSyVcX9zu4yyOch4dzLYgDvMj8bVJZfo8ERL"
-    )
+
     File.binwrite("public/images/test.jpg",params[:image].read)
     @image="/images/test.jpg"
     File.open("#{Rails.root}/public#{@image}") do |images_file|
-      classes = visual_recognition.classify(
+      classes = @@visual_recognition.classify(
         images_file: images_file,
         classifier_ids:["food"],
         accept_language: ["ja"]
@@ -36,14 +38,11 @@ class ExampleController < ApplicationController
 
   #なんでも認証
   def bbb
-    visual_recognition = VisualRecognitionV3.new(
-      version: "2018-03-19",
-      iam_apikey: "UijvdSiykSyVcX9zu4yyOch4dzLYgDvMj8bVJZfo8ERL"
-    )
+
     File.binwrite("public/images/test.jpg",params[:image].read)
     @image="/images/test.jpg"
     File.open("#{Rails.root}/public#{@image}") do |images_file|
-      classes = visual_recognition.classify(
+      classes = @@visual_recognition.classify(
         images_file: images_file,
         #classifier_ids:["text"],
         accept_language: ["ja"]
@@ -54,14 +53,11 @@ class ExampleController < ApplicationController
 
   #食べ物認証
   def ccc
-    visual_recognition = VisualRecognitionV3.new(
-      version: "2018-03-19",
-      iam_apikey: "UijvdSiykSyVcX9zu4yyOch4dzLYgDvMj8bVJZfo8ERL"
-    )
+
     File.binwrite("public/images/test.jpg",params[:image].read)
     @image="/images/test.jpg"
     File.open("#{Rails.root}/public#{@image}") do |images_file|
-      faces = visual_recognition.detect_faces(
+      faces = @@visual_recognition.detect_faces(
         images_file: images_file
       )
       @ccc=JSON.parse(JSON.pretty_generate(faces.result))["images"][0]["faces"][0]
