@@ -17,51 +17,46 @@ class ExampleController < ApplicationController
     iam_apikey: ENV["APIKEY"]
   )
 
-  #文字認証
+  #文字認識
   def ddd
   end
 
-  #食べ物認証
+  #食べ物認識
   def aaa
-
-    File.binwrite("public/images/test.jpg",params[:image].read)
-    @image="/images/test.jpg"
+    @count=Count.find(1).count
+    Count.update(count:@count+1)
+    File.binwrite("public/images/test#{@count}.jpg",params[:image].read)
+    @image="/images/test#{@count}.jpg"
     File.open("#{Rails.root}/public#{@image}") do |images_file|
-      classes = @@visual_recognition.classify(
-        images_file: images_file,
-        classifier_ids:["food"],
-        accept_language: ["ja"]
-      )
+      classes = @@visual_recognition.classify(images_file: images_file,classifier_ids:["food"],accept_language: ["ja"])
       @aaa= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"]
     end
   end
 
-  #なんでも認証
+  #ナンデモ認識
   def bbb
-
-    File.binwrite("public/images/test.jpg",params[:image].read)
-    @image="/images/test.jpg"
+    @count=Count.find(1).count
+    Count.update(count:@count+1)
+    File.binwrite("public/images/test#{@count}.jpg",params[:image].read)
+    @image="/images/test#{@count}.jpg"
     File.open("#{Rails.root}/public#{@image}") do |images_file|
-      classes = @@visual_recognition.classify(
-        images_file: images_file,
-        #classifier_ids:["text"],
-        accept_language: ["ja"]
-      )
+      classes = @@visual_recognition.classify(images_file: images_file,accept_language: ["ja"])
       @bbb= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"]
     end
   end
 
-  #食べ物認証
+  #顔認識
   def ccc
-
-    File.binwrite("public/images/test.jpg",params[:image].read)
-    @image="/images/test.jpg"
+    @count=Count.find(1).count
+    Count.update(count:@count+1)
+    File.binwrite("public/images/test#{@count}.jpg",params[:image].read)
+    @image="/images/test#{@count}.jpg"
     File.open("#{Rails.root}/public#{@image}") do |images_file|
-      faces = @@visual_recognition.detect_faces(
-        images_file: images_file
-      )
+      faces = @@visual_recognition.detect_faces(images_file: images_file)
       @ccc=JSON.parse(JSON.pretty_generate(faces.result))["images"][0]["faces"][0]
     end
   end
 
+  def test
+  end
 end
