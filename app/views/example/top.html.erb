@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1><a href="top">読め<span>ルン</span>です。</a></h1>
+  <h1><a href="/">読め<span>ルン</span>です。</a></h1>
   <h2>処理センタクがめん。</h2>
   <div class="second">
     <div class="subtitle">したいコトを選<span>ブン</span>です。</div>
@@ -16,28 +16,28 @@
   <div class="parent">
     <div class="child">
       <div class="divName"></div>
-      <%= form_tag("ddd",method: "post")   do  %>
+      <%= form_tag("/example/ddd",method: "post")   do  %>
       <button type="submit" name="name" value="1" class="submit_btn picture1"></button>
       <% end %>
       <p class="div-contents">手書き文字をテキストに変換しちゃ<span>ウン</span>です。</p>
     </div>
     <div class="child">
       <div class="divName"></div>
-      <%= form_tag("upload",method: "post")   do  %>
+      <%= form_tag("/example/upload",method: "post")   do  %>
         <button type="submit" name="name" value="2" class="submit_btn picture2"></button>
       <% end %>
       <p class="div-contents">顔写真から年齢と性別を認識しちゃ<span>ウン</span>です。</p>
     </div>
     <div class="child">
       <div class="divName"></div>
-      <%= form_tag("upload",method: "post")   do  %>
+      <%= form_tag("/example/upload",method: "post")   do  %>
       <button type="submit" name="name" value="3" class="submit_btn picture3"></button>
       <% end %>
       <p class="div-contents">食べ物の名前を当てちゃ<span>ウン</span>です。</p>
     </div>
     <div class="child">
       <div class="divName"></div>
-      <%= form_tag("upload",method: "post")   do  %>
+      <%= form_tag("/example/upload",method: "post")   do  %>
       <button type="submit" name="name" value="4" class="submit_btn picture4"></button>
       <% end %>
       <p class="div-contents">ドンナ画像でも認識しちゃ<span>ウン</span>です。</p>
