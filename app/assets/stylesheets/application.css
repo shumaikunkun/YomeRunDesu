@@ -273,3 +273,8 @@ div .analysis h2 {
 .btn-horizontal-border:hover:after {
   top: 3px;
 }
+
+.form_confirm{
+  color: #555555;
+  padding: 20px 30px 0px 30px;
+}

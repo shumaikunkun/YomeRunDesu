@@ -1,15 +1,15 @@
 <% if params["name"]=="1" %>
 <% path="ddd" %>
-<% title="文字認証"%>
+<% title="もじカイセキ。"%>
 <% elsif params["name"]=="2" %>
 <% path="ccc" %>
-<% title="顔認証"%>
+<% title="かおカイセキ。"%>
 <% elsif params["name"]=="3" %>
 <% path="aaa" %>
-<% title="食べ物認証"%>
+<% title="たべものカイセキ。"%>
 <% elsif params["name"]=="4" %>
 <% path="bbb" %>
-<% title="ナンデモ認証"%>
+<% title="なんでもカイセキ。"%>
 <% end %>
 <!DOCTYPE html>
 <html lang="ja">
@@ -21,9 +21,9 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i&display=swap" rel="stylesheet">
 </head>
 <body>
-  <% if request.post? %>
   <h1><a href="/">読め<span>ルン</span>です。</a></h1>
-  <h2>画像をアップロード</h2>
+  <h2><%= title %></h2>
+  <% if request.post? %>
   <div class="upload-wrap">
     <div class="drag-area">
       <p>ここにファイルやフォルダをドラッグすると簡単に画像をアップロードできます</p>
@@ -34,9 +34,12 @@
     <% end %>
   </div>
   <% else %>
-  
-
-
+  <h2>フォーム再送信の確認</h2>
+  <div class="form_confirm">このウェブページを正しく表示するには、先ほど入力したデータが必要です。データは再送信できますが、このページで先ほど行った操作を繰り返すことになります。
+  ページの読み込みに必要なデータを再送信するには、再読み込みボタンを押してください。</div>
+  <center>
+    <br/><a href="/" class="btn-horizontal-border">ホームへ戻る</a>
+  </center>
   <% end %>
 </body>
 </html>
