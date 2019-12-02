@@ -8,7 +8,7 @@
   <h1><a href="/">読め<span>ルン</span>です。</a></h1>
   <div class="wrap">
     <div class="img">
-      <h2>かおカイセキ。</h2>
+      <h2>皇族カイセキ。</h2>
       <%= image_tag(@image) %>
     </div>
     <div class="analysis">
@@ -28,7 +28,15 @@
             <% end %>
             <% end %>
 
-            <%= @ccc %>
+            <li>あなたは...</li>
+            <%if @ccc==nil %>
+              <li>残念ながら<span>皇族</span>ではありません…</li>
+            <% else %>
+              <% @name="愛子さま" if @ccc["class"]=="aiko" %>
+              <% @name="悠仁さま" if @ccc["class"]=="hisahito" %>
+              <li><span><%=(@ccc["score"]*100).round%>％</span>の確率で<span><%=@name%></span>です!</li>
+              <li>おめでとうございます🎉🎉🎉</li>
+            <% end %>
 
           </ul>
         </div>

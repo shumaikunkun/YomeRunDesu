@@ -55,7 +55,7 @@ class ExampleController < ApplicationController
       # faces = @@visual_recognition.detect_faces(images_file: images_file)
       # @ccc=JSON.parse(JSON.pretty_generate(faces.result))["images"][0]["faces"][0]
       classes = @@visual_recognition.classify(images_file: images_file,classifier_ids:["royal_162940933"])
-      @ccc=JSON.pretty_generate(classes.result)
+      @ccc= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"][0]
     end
   end
 
