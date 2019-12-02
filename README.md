@@ -12,4 +12,4 @@
 IBM CloudでVisual RecognitioのAPIをたて、Ruby on Railsで構築したアプリケーションでAPIを叩いた結果を整形して表示する
 
 ## リンク
-https://immense-crag-66405.herokuapp.com/example/top
+https://immense-crag-66405.herokuapp.com
