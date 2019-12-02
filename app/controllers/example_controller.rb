@@ -52,8 +52,10 @@ class ExampleController < ApplicationController
     File.binwrite("public/images/test#{@count}.jpg",params[:image].read)
     @image="/images/test#{@count}.jpg"
     File.open("#{Rails.root}/public#{@image}") do |images_file|
-      faces = @@visual_recognition.detect_faces(images_file: images_file)
-      @ccc=JSON.parse(JSON.pretty_generate(faces.result))["images"][0]["faces"][0]
+      # faces = @@visual_recognition.detect_faces(images_file: images_file)
+      # @ccc=JSON.parse(JSON.pretty_generate(faces.result))["images"][0]["faces"][0]
+      classes = @@visual_recognition.classify(images_file: images_file,classifier_ids:["royal_162940933"])
+      @ccc=JSON.pretty_generate(classes.result)
     end
   end
 

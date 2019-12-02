@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html　lang="ja">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <title>読めルンです。</title>
@@ -16,6 +16,9 @@
       <div class="analysis-text">
         <div id = "result">
           <ul>
+
+
+            <%if false %>
             <li>あなたは...</li>
             <%if @ccc==nil %>
               <li>残念ながら<span>人間</span>ではありません…</li>
@@ -23,6 +26,10 @@
               <li><span><%=(@ccc["age"]["score"]*100).round %>％</span>の確率で<span><%=@ccc["age"]["min"]%>~<%=@ccc["age"]["max"]%></span>歳で、</li>
               <li><span><%=(@ccc["gender"]["score"]*100).round %>％</span>の確率で<span><%=@ccc["gender"]["gender"]=="MALE"?"男性":"女性"%></span>です!</li>
             <% end %>
+            <% end %>
+
+            <%= @ccc %>
+
           </ul>
         </div>
       </div>
