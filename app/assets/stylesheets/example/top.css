@@ -164,3 +164,15 @@ border-radius: 20px;
 .div-contents {
 margin-top:15px;
 }
+
+
+.site-footer{
+	background: #555;
+	padding: 80px 0;
+  clear:left;
+}
+.copyright{
+	color: #fff;
+	font-size: 20px;
+	text-align: center;
+}
