@@ -4,13 +4,14 @@ Rails.application.routes.draw do
   #get 'example/top'
   get 'example/upload'
   post 'example/upload'
+  get 'example/aaa'
   post 'example/aaa'
+  get 'example/bbb'
   post 'example/bbb'
+  get 'example/ccc'
   post 'example/ccc'
   get 'example/ddd'
   post 'example/ddd'
   get 'example/test'
-
-
 
 end

@@ -6,6 +6,11 @@
 </head>
 <body>
   <h1><a href="/">読め<span>ルン</span>です。</a></h1>
+
+
+
+  <% if request.post? %>
+
   <div class="wrap">
     <div class="img">
       <h2>皇族カイセキ。</h2>
@@ -27,6 +32,8 @@
             <% end %>
             <% end %>
 
+            <%=@json %>
+
             <li>あなたは...</li>
             <%if @ccc==nil %>
               <li>残念ながら<span>皇族</span>ではありません…</li>
@@ -43,9 +50,17 @@
       </div>
     </div>
   </div>
+
+  <% else %>
+  <h2>フォーム再送信の確認</h2>
+  <div class="form_confirm">このウェブページを正しく表示するには、先ほど入力したデータが必要です。データは再送信できますが、このページで先ほど行った操作を繰り返すことになります。
+  ページの読み込みに必要なデータを再送信するには、再読み込みボタンを押してください。</div>
+  <% end %>
+
   <center>
-    <a href="/" class="btn-horizontal-border">ホームへ戻る</a>
+    <br/><a href="/" class="btn-horizontal-border">ホームへ戻る</a>
   </center>
+
   <br><br>
   <footer class="site-footer">
     <p class="copyright">&#169;2019 Shumaikun</p>

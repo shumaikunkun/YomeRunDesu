@@ -23,39 +23,46 @@ class ExampleController < ApplicationController
 
   #食べ物認識
   def aaa
-    @count=Count.find(1).count
-    Count.update(count:@count+1)
-    File.binwrite("public/images/test#{@count}.jpg",params[:image].read)
-    @image="/images/test#{@count}.jpg"
-    File.open("#{Rails.root}/public#{@image}") do |images_file|
-      classes = @@visual_recognition.classify(images_file: images_file,classifier_ids:["food"],accept_language: ["ja"])
-      @aaa= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"]
+    if request.post?
+      @count=Count.find(1).count
+      Count.update(count:@count+1)
+      File.binwrite("public/images/test#{@count}.jpg",params[:image].read)
+      @image="/images/test#{@count}.jpg"
+      File.open("#{Rails.root}/public#{@image}") do |images_file|
+        classes = @@visual_recognition.classify(images_file: images_file,classifier_ids:["food"],accept_language: ["ja"])
+        @aaa= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"]
+      end
     end
   end
 
   #ナンデモ認識
   def bbb
-    @count=Count.find(1).count
-    Count.update(count:@count+1)
-    File.binwrite("public/images/test#{@count}.jpg",params[:image].read)
-    @image="/images/test#{@count}.jpg"
-    File.open("#{Rails.root}/public#{@image}") do |images_file|
-      classes = @@visual_recognition.classify(images_file: images_file,accept_language: ["ja"])
-      @bbb= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"]
+    if request.post?
+      @count=Count.find(1).count
+      Count.update(count:@count+1)
+      File.binwrite("public/images/test#{@count}.jpg",params[:image].read)
+      @image="/images/test#{@count}.jpg"
+      File.open("#{Rails.root}/public#{@image}") do |images_file|
+        classes = @@visual_recognition.classify(images_file: images_file,accept_language: ["ja"])
+        @bbb= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"]
+      end
     end
   end
 
   #顔認識
   def ccc
-    @count=Count.find(1).count
-    Count.update(count:@count+1)
-    File.binwrite("public/images/test#{@count}.jpg",params[:image].read)
-    @image="/images/test#{@count}.jpg"
-    File.open("#{Rails.root}/public#{@image}") do |images_file|
-      # faces = @@visual_recognition.detect_faces(images_file: images_file)
-      # @ccc=JSON.parse(JSON.pretty_generate(faces.result))["images"][0]["faces"][0]
-      classes = @@visual_recognition.classify(images_file: images_file,classifier_ids:["royal_162940933"])
-      @ccc= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"][0]
+    if request.post?
+      @count=Count.find(1).count
+      Count.update(count:@count+1)
+      File.binwrite("public/images/test#{@count}.jpg",params[:image].read)
+      @image="/images/test#{@count}.jpg"
+      File.open("#{Rails.root}/public#{@image}") do |images_file|
+        # faces = @@visual_recognition.detect_faces(images_file: images_file)
+        # @ccc=JSON.parse(JSON.pretty_generate(faces.result))["images"][0]["faces"][0]
+        classes = @@visual_recognition.classify(images_file: images_file,classifier_ids:["royal_162940933"])
+        @json=JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"]
+        @ccc= @json[0]
+      end
     end
   end
 

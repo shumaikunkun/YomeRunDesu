@@ -22,13 +22,15 @@
 </head>
 <body>
   <h1><a href="/">読め<span>ルン</span>です。</a></h1>
-  <h2><%= title %></h2>
+
+
   <% if request.post? %>
+  <h2><%= title %></h2>
   <div class="upload-wrap">
+    <%= form_tag(path, method: "post", multipart: true, name: "uploadform") do %>
     <div class="drag-area">
       <p>ここにファイルやフォルダをドラッグすると簡単に画像をアップロードできます</p>
     </div>
-    <%= form_tag(path, method: "post", multipart: true, name: "uploadform") do %>
     <input id="myfile" type="file" name="image" accept="image/*">
     <input type="submit" class="submit-btn" value="送信" onclick="return checkForm();">
     <% end %>
@@ -41,6 +43,7 @@
     <br/><a href="/" class="btn-horizontal-border">ホームへ戻る</a>
   </center>
   <% end %>
+
   <br><br>
   <footer class="site-footer">
     <p class="copyright">&#169;2019 Shumaikun</p>
