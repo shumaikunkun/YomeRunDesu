@@ -22,23 +22,23 @@
         <div id = "result">
           <ul>
 
+
             <%if false %>
             <li>あなたは...</li>
-            <%if @ccc==nil %>
-              <li>残念ながら<span>人間</span>ではありません…</li>
-            <% else %>
-              <li><span><%=(@ccc["age"]["score"]*100).round %>％</span>の確率で<span><%=@ccc["age"]["min"]%>~<%=@ccc["age"]["max"]%></span>歳で、</li>
-              <li><span><%=(@ccc["gender"]["score"]*100).round %>％</span>の確率で<span><%=@ccc["gender"]["gender"]=="MALE"?"男性":"女性"%></span>です!</li>
-            <% end %>
+              <%if @ccc==nil %>
+                <li>残念ながら<span>人間</span>ではありません…</li>
+              <% else %>
+                <li><span><%=(@ccc["age"]["score"]*100).round %>％</span>の確率で<span><%=@ccc["age"]["min"]%>~<%=@ccc["age"]["max"]%></span>歳で、</li>
+                <li><span><%=(@ccc["gender"]["score"]*100).round %>％</span>の確率で<span><%=@ccc["gender"]["gender"]=="MALE"?"男性":"女性"%></span>です!</li>
+              <% end %>
             <% end %>
 
-            <%=@json %>
+      
 
             <li>あなたは...</li>
             <%if @ccc==nil %>
               <li>残念ながら<span>皇族</span>ではありません…</li>
             <% else %>
-              <% @name="" %>
               <% @name_hash={"aiko"=>"愛子さま","hisahito"=>"悠仁さま","joko"=>"上皇陛下","tenno"=>"天皇陛下","koshi"=>"皇嗣殿下"} %>
               <% @name_hash.each{|k,v|@name=v if @ccc["class"]==k} %>
               <li><span><%=(@ccc["score"]*100).round%>％</span>の確率で<span><%=@name%></span>です!</li>
