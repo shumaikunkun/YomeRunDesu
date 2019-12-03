@@ -17,7 +17,6 @@
         <div id = "result">
           <ul>
 
-
             <%if false %>
             <li>あなたは...</li>
             <%if @ccc==nil %>
@@ -32,8 +31,9 @@
             <%if @ccc==nil %>
               <li>残念ながら<span>皇族</span>ではありません…</li>
             <% else %>
-              <% @name="愛子さま" if @ccc["class"]=="aiko" %>
-              <% @name="悠仁さま" if @ccc["class"]=="hisahito" %>
+              <% @name="" %>
+              <% @name_hash={"aiko"=>"愛子さま","hisahito"=>"悠仁さま","joko"=>"上皇陛下","tenno"=>"天皇陛下","koshi"=>"皇嗣殿下"} %>
+              <% @name_hash.each{|k,v|@name=v if @ccc["class"]==k} %>
               <li><span><%=(@ccc["score"]*100).round%>％</span>の確率で<span><%=@name%></span>です!</li>
               <li>おめでとうございます🎉🎉🎉</li>
             <% end %>
