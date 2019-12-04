@@ -33,15 +33,15 @@
               <% end %>
             <% end %>
 
-      
-
             <li>あなたは...</li>
-            <%if @ccc==nil %>
+            <%if @json==[] %>
               <li>残念ながら<span>皇族</span>ではありません…</li>
             <% else %>
               <% @name_hash={"aiko"=>"愛子さま","hisahito"=>"悠仁さま","joko"=>"上皇陛下","tenno"=>"天皇陛下","koshi"=>"皇嗣殿下"} %>
-              <% @name_hash.each{|k,v|@name=v if @ccc["class"]==k} %>
-              <li><span><%=(@ccc["score"]*100).round%>％</span>の確率で<span><%=@name%></span>です!</li>
+              <% @json.each do |a| %>
+                <% @name_hash.each{|k,v|@name=v if a["class"]==k} %>
+                <li><span><%=(a["score"]*100).round%>％</span>の確率で<span><%=@name%></span>です!</li>
+              <% end %>
               <li>おめでとうございます🎉🎉🎉</li>
             <% end %>
 

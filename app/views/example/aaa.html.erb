@@ -21,7 +21,7 @@
         <div id = "result">
           <ul>
             <li>この画像は...</li>
-            <% @aaa.each do|a| %>
+            <% @json.each do|a| %>
             <li><span><%= (a["score"]*100).round %>%</span>の確率で<span><%= a["class"] %></span>です。</li>
             <% end %>
           </ul>
