@@ -1,58 +1,26 @@
 class ExampleController < ApplicationController
-  require "json"
-  require "ibm_watson/visual_recognition_v3"
+  ["json","ibm_watson/visual_recognition_v3"].map{|lib|require lib}
   include IBMWatson
   protect_from_forgery
   @@visual_recognition = VisualRecognitionV3.new( version: "2018-03-19", iam_apikey: ENV["APIKEY"] )
 
-  before_action :set_image, only: [:aaa, :bbb, :ccc]  #共通部分をまとめる
+  before_action->{ set_image(["food"],["ja"]) }, only: [:aaa]  #共通部分をまとめる
+  before_action->{ set_image(["default"],["ja"]) }, only: [:bbb]
+  before_action->{ set_image(["royal_162940933"],["en"]) }, only: [:ccc]
 
-  define_method(:top){}
-  define_method(:upload){}
-  #文字認識
-  define_method(:ddd){}
+  [:top, :upload, :aaa, :bbb, :ccc, :ddd, :test].map{|method|define_method(method){}}
+  #トップ画面、アップロード画面、食べ物認識、なんでも認識、顔認識、文字認識、テスト画面　それぞれのメソッドを一括定義
 
-
-  #食べ物認識
-  def aaa
-    if request.post?
-      File.open("#{Rails.root}/public#{@image}") do |images_file|
-        classes = @@visual_recognition.classify(images_file: images_file,classifier_ids:["food"],accept_language: ["ja"])
-        @json= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"]
-      end
-    end
-  end
-
-  #ナンデモ認識
-  def bbb
-    if request.post?
-      File.open("#{Rails.root}/public#{@image}") do |images_file|
-        classes = @@visual_recognition.classify(images_file: images_file,accept_language: ["ja"])
-        @json= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"]
-      end
-    end
-  end
-
-  #顔認識
-  def ccc
-    if request.post?
-      File.open("#{Rails.root}/public#{@image}") do |images_file|
-        # faces = @@visual_recognition.detect_faces(images_file: images_file)
-        # @ccc=JSON.parse(JSON.pretty_generate(faces.result))["images"][0]["faces"][0]
-        classes = @@visual_recognition.classify(images_file: images_file,classifier_ids:["royal_162940933"])
-        @json= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"]
-      end
-    end
-  end
-
-  define_method(:set_image){
+  define_method(:set_image) do |classifier, lang|  #メソッドごとに分類器と言語が違うためそれを引数にする
     if request.post?
       @count=Count.find(1).count
       Count.update(count:@count+1)
       File.binwrite("public/images/test#{@count}.jpg",params[:image].read)
       @image="/images/test#{@count}.jpg"
+      File.open("#{Rails.root}/public#{@image}") do |images_file|
+        classes = @@visual_recognition.classify(images_file:images_file, classifier_ids:classifier, accept_language:lang)
+        @json= JSON.parse(JSON.pretty_generate(classes.result))["images"][0]["classifiers"][0]["classes"]
+      end
     end
-  }
-
-  define_method(:test){}
+  end
 end
